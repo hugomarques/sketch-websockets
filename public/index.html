@@ -1,14 +1,21 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <script language="javascript" type="text/javascript" src="javascripts/p5.js"></script>
-  <script language="javascript" src="javascripts/p5.dom.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script language="javascript" type="text/javascript" src="javascripts/sketch.js"></script>
   <!-- this line removes any default padding and style. you might only need one of these values set. -->
-  <style> body {padding: 0; margin: 0;} </style>
+  <style type="text/css">
+    html, body {
+      background: #222;
+      padding: 0;
+      margin: 0;
+    }
+  </style>
 </head>
-
 <body>
+  <div id="container"></div>
+  <!--<script language="javascript" type="text/javascript" src="javascripts/p5.js"></script>-->
+  <!--<script language="javascript" src="javascripts/p5.dom.js"></script>-->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="javascripts/sketch.js"></script>
+  <script language="javascript" type="text/javascript" src="javascripts/app.js"></script>
 </body>
 </html>
