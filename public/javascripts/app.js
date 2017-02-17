@@ -12,7 +12,7 @@ Particle.prototype = {
     this.wander = 0.15;
     this.theta = random( TWO_PI );
     this.drag = 0.92;
-    this.color = '#fff';
+    this.color = '#0F0';
     this.x = x || 0.0;
     this.y = y || 0.0;
     this.vx = 0.0;
@@ -26,7 +26,7 @@ Particle.prototype = {
     this.theta += random( -0.5, 0.5 ) * this.wander;
     this.vx += sin( this.theta ) * 0.1;
     this.vy += cos( this.theta ) * 0.1;
-    this.radius *= 0.96;
+    this.radius *= 0.99;
     this.alive = this.radius > 0.5;
   },
   draw: function( ctx ) {
@@ -41,10 +41,19 @@ Particle.prototype = {
 // Example
 // ----------------------------------------
 var MAX_PARTICLES = 280;
-var COLOURS = [ '#69D2E7', '#A7DBD8', '#E0E4CC', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
+var COLOURS = [ '#69D2E7', '#A7DBD8', '#0F0', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
 var particles = [];
 var pool = [];
 var socket;
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++ ) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
 var demo = Sketch.create({
   container: document.getElementById( 'container' )
@@ -97,7 +106,7 @@ demo.mousemove = function() {
   var particle, theta, force, touch, max, i, j, n;
   for ( i = 0, n = demo.touches.length; i < n; i++ ) {
     touch = demo.touches[i], max = random( 1, 4 );
-    for ( j = 0; j < max; j++ ) {
+    // for ( j = 0; j < max; j++ ) {
       demo.spawn( touch.x, touch.y );
       var data = {
         x: touch.x,
@@ -107,12 +116,12 @@ demo.mousemove = function() {
         }
       }
       socket.emit("mouse", data);
-    }
+    // }
   }
 };
 
 demo.socketSetup = function() {
-  socket = io.connect("http://192.168.1.62:3000");
+  socket = io.connect("http://sketch.hugodesmarques.com");
   socket.on('mouse', demo.newParticles);
 };
 
