@@ -40,7 +40,7 @@ Particle.prototype = {
 // ----------------------------------------
 // Example
 // ----------------------------------------
-var MAX_PARTICLES = 280;
+var MAX_PARTICLES = 350;
 var COLOURS = [ '#69D2E7', '#A7DBD8', '#0F0', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
 var particles = [];
 var pool = [];
@@ -103,7 +103,7 @@ demo.draw = function() {
 };
 
 demo.mousemove = function() {
-  var particle, theta, force, touch, max, i, j, n;
+  var touch, max, i, n;
   for ( i = 0, n = demo.touches.length; i < n; i++ ) {
     touch = demo.touches[i], max = random( 1, 4 );
     // for ( j = 0; j < max; j++ ) {
@@ -126,6 +126,6 @@ demo.socketSetup = function() {
 };
 
 demo.newParticles = function(data) {
-  demo.spawn(data.x, data.y);
   demo.start();
+  demo.spawn(data.x, data.y);
 };
