@@ -109,8 +109,8 @@ demo.mousemove = function() {
     // for ( j = 0; j < max; j++ ) {
       demo.spawn( touch.x, touch.y );
       var data = {
-        x: touch.x,
-        y: touch.y,
+        x: touch.x/demo.width,
+        y: touch.y/demo.height,
         toString: function() {
           return touch.x +","+ touch.y;
         }
@@ -127,5 +127,5 @@ demo.socketSetup = function() {
 
 demo.newParticles = function(data) {
   demo.start();
-  demo.spawn(data.x, data.y);
+  demo.spawn(data.x*demo.width, data.y*demo.height);
 };
