@@ -18,7 +18,7 @@ see each other particles in the screen.
 git clone https://github.com/hugomarques/sketch-websockets.git
 ```
 
-Remember to modify **/public/javascripts/app.js** line 124 to point to your localhost:3000. 
+Remember to modify **/public/javascripts/client.js** line 124 to point to your localhost:3000. 
 
 ## Run
 

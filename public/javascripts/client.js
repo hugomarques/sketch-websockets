@@ -24,8 +24,8 @@ Particle.prototype = {
     this.vx *= this.drag;
     this.vy *= this.drag;
     this.theta += random( -0.5, 0.5 ) * this.wander;
-    this.vx += sin( this.theta ) * 0.1;
-    this.vy += cos( this.theta ) * 0.1;
+    this.vx += sin( this.theta ) * 0.08;
+    this.vy += cos( this.theta ) * 0.08;
     this.radius *= 0.99;
     this.alive = this.radius > 0.5;
   },
@@ -75,14 +75,14 @@ demo.spawn = function( x, y ) {
   if ( particles.length >= MAX_PARTICLES )
     pool.push( particles.shift() );
   particle = pool.length ? pool.pop() : new Particle();
-  particle.init( x, y, random( 5, 40 ) );
+  particle.init( x, y, random( 5, 30 ) );
   particle.wander = random( 0.5, 2.0 );
   particle.color = random( COLOURS );
   particle.drag = random( 0.9, 0.99 );
   theta = random( TWO_PI );
-  force = random( 2, 8 );
-  particle.vx = sin( theta ) * force;
-  particle.vy = cos( theta ) * force;
+  // force = random( 2, 8 );
+  // particle.vx = sin( theta ) * force;
+  // particle.vy = cos( theta ) * force;
   particles.push( particle );
 };
 
@@ -105,18 +105,16 @@ demo.draw = function() {
 demo.mousemove = function() {
   var touch, max, i, n;
   for ( i = 0, n = demo.touches.length; i < n; i++ ) {
-    touch = demo.touches[i], max = random( 1, 4 );
-    // for ( j = 0; j < max; j++ ) {
-      demo.spawn( touch.x, touch.y );
-      var data = {
-        x: touch.x/demo.width,
-        y: touch.y/demo.height,
-        toString: function() {
-          return touch.x +","+ touch.y;
-        }
+    touch = demo.touches[i];
+    demo.spawn( touch.x, touch.y );
+    var data = {
+      x: touch.x/demo.width,
+      y: touch.y/demo.height,
+      toString: function() {
+        return touch.x +","+ touch.y;
       }
-      socket.emit("mouse", data);
-    // }
+    }
+    socket.emit("mouse", data);
   }
 };
 
