@@ -41,7 +41,6 @@ Particle.prototype = {
 // Example
 // ----------------------------------------
 var MAX_PARTICLES = 350;
-var COLOURS = [ '#69D2E7', '#A7DBD8', '#0F0', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ];
 var particles = [];
 var pool = [];
 var socket;
@@ -60,6 +59,7 @@ var demo = Sketch.create({
 });
 demo.setup = function() {
   demo.socketSetup();
+  demo.colours = random([ '#69D2E7', '#A7DBD8', '#0F0', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ]);
 
   // Set off some initial particles.
   var i, x, y;
@@ -70,14 +70,14 @@ demo.setup = function() {
   }
 };
 
-demo.spawn = function( x, y ) {
+demo.spawn = function( x, y, color ) {
   var particle, theta, force;
   if ( particles.length >= MAX_PARTICLES )
     pool.push( particles.shift() );
   particle = pool.length ? pool.pop() : new Particle();
   particle.init( x, y, random( 5, 30 ) );
   particle.wander = random( 0.5, 2.0 );
-  particle.color = random( COLOURS );
+  particle.color = color ? color : demo.colours;
   particle.drag = random( 0.9, 0.99 );
   theta = random( TWO_PI );
   // force = random( 2, 8 );
@@ -102,6 +102,16 @@ demo.draw = function() {
   }
 };
 
+demo.socketSetup = function() {
+  socket = io.connect("http://sketch.hugodesmarques.com");
+  socket.on('mouse', demo.newParticles);
+};
+
+demo.newParticles = function(data) {
+  demo.start();
+  demo.spawn(data.x*demo.width, data.y*demo.height, data.color);
+};
+
 demo.mousemove = function() {
   var touch, max, i, n;
   for ( i = 0, n = demo.touches.length; i < n; i++ ) {
@@ -110,6 +120,7 @@ demo.mousemove = function() {
     var data = {
       x: touch.x/demo.width,
       y: touch.y/demo.height,
+      color: demo.colours,
       toString: function() {
         return touch.x +","+ touch.y;
       }
@@ -118,12 +129,3 @@ demo.mousemove = function() {
   }
 };
 
-demo.socketSetup = function() {
-  socket = io.connect("http://sketch.hugodesmarques.com");
-  socket.on('mouse', demo.newParticles);
-};
-
-demo.newParticles = function(data) {
-  demo.start();
-  demo.spawn(data.x*demo.width, data.y*demo.height);
-};
