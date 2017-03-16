@@ -30,5 +30,13 @@ On your browser access the address localhost:3000.
 
 # Online demo
 
-Access sketch.hugodesmarques.com
+See at http://sketch.hugodesmarques.com
+
+# References
+
+* https://www.youtube.com/watch?v=bjULmG8fqc8
+* http://soulwire.github.io/sketch.js/examples/particles.html
+* https://css-tricks.com/using-svg/
+* http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create_deploy_nodejs_express.html
+
 
