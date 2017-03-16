@@ -45,15 +45,6 @@ var particles = [];
 var pool = [];
 var socket;
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++ ) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 var demo = Sketch.create({
   container: document.getElementById( 'container' )
 });
@@ -80,9 +71,9 @@ demo.spawn = function( x, y, color ) {
   particle.color = color ? color : demo.colours;
   particle.drag = random( 0.9, 0.99 );
   theta = random( TWO_PI );
-  // force = random( 2, 8 );
-  // particle.vx = sin( theta ) * force;
-  // particle.vy = cos( theta ) * force;
+  force = random( 2, 8 );
+  particle.vx = sin( theta ) * force;
+  particle.vy = cos( theta ) * force;
   particles.push( particle );
 };
 
@@ -113,7 +104,7 @@ demo.newParticles = function(data) {
 };
 
 demo.mousemove = function() {
-  var touch, max, i, n;
+  var touch, i, n;
   for ( i = 0, n = demo.touches.length; i < n; i++ ) {
     touch = demo.touches[i];
     demo.spawn( touch.x, touch.y );

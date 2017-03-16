@@ -567,7 +567,7 @@
       options = extend( options || {}, defaults );
 
       options.element = context.canvas || context;
-      options.element.className += ' sketch';
+      options.element.className += ' sketch fixed-canvas';
 
       extend( context, options, true );
 
