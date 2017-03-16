@@ -9,25 +9,21 @@
       margin: 0;
     }
 
-    .centered {
-      position:fixed;
-      font-size: xx-large;
-      color: #fff;
-      top: 50%;
-      left: 50%;
-      /* bring your own prefixes */
-      transform: translate(-50%, -50%);
+    .fixed-canvas {
+      display: block;
+      text-indent: -9999px;
+      background: url("images/connect.svg") no-repeat;
+      background-position: 50% 50%;
+      background-size: 70%;
     }
+
   </style>
 </head>
 <body>
-  <div id="container">
-  </div>
-  <div class="centered">
-    BELIEVE
-  </div>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="javascripts/sketch.js"></script>
-  <script language="javascript" type="text/javascript" src="javascripts/client.js"></script>
+<div id="container">
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="javascripts/sketch.js"></script>
+<script language="javascript" type="text/javascript" src="javascripts/client.js"></script>
 </body>
 </html>
