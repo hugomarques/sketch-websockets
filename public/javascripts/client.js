@@ -50,7 +50,10 @@ var demo = Sketch.create({
 });
 demo.setup = function() {
   demo.socketSetup();
-  demo.colours = random([ '#69D2E7', '#A7DBD8', '#0F0', '#F38630', '#FA6900', '#FF4E50', '#F9D423' ]);
+  demo.colours = random([
+    '#BE953C', '#D2B577', '#E5D5B1', '#F9F4EC',
+    '#000', '#FFF',
+    '#002b9b', "#1A40A5", "#3355AF", "#4D6BB9"]);
 
   // Set off some initial particles.
   var i, x, y;
