@@ -28,7 +28,3 @@ npm start
 
 On your browser access the address localhost:3000.
 
-# Online demo
-
-Access sketch.hugodesmarques.com
-
